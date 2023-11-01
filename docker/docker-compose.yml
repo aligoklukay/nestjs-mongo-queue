@@ -1,0 +1,23 @@
+version: '3.9'
+name: task-consumer-container
+services:
+
+  ### MONGO ###############################################
+  mongo:
+    image: mongo:5.0.22
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=task_username
+      - MONGO_INITDB_ROOT_PASSWORD=task_password
+      - MONGO_INITDB_DATABASE=task_db
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+    container_name: mongo
+volumes:
+  data:
+    driver: local
+networks:
+  local:
+    driver: bridge
